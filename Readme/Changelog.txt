@@ -1,38 +1,17 @@
 ==Revisions==
 ===Last version===
-Last version: 50409 at 05-07-2011<br>
+Last version: 50405 at 'not released yet'<br>
 Any feature requests or bug reports, please don't hesistate to contact me at coen@vdwel.me!
 
 ===Changelog===
-====50409====
-* Lifebloom bar workaround to fix SPELL_AURA_REFRESH bug with WoW 4.2. Mind, though: it's a (pretty damn close) estimate, still!
-====50408====
-* Update for patch 4.2
-====50407====
-* Fixed the issue where the back frame kept coming to the foreground
-* Fixed the LUA error when rezzing a player with bottom buttons hidden
-* Allowed two frame sorting options:
-** Sort By Role
-** Show Self First
-* Changed Health Deficit options to be more suitable for fights like Chimaeron and Nefarian
-* Fixed the layout "radio" button behaviour in the options menu
-====50406====
-* Support for patch 4.1
-* Minor bugfix in scaling with vertical layout
 ====50405====
-* Allowed for Default or Vertical layout!
-* Added opacity for the HoT bars
-* Identifying tank/healers and sorting on that automatically
-* Added slider to change HoT bar background opacity
-* Fixed a bug where weird things started happening with deficit options
-* Finally added proper resizing options (scaling)
-* Minor bug fixes
+* Health deficit is now properly adapted to the new HP levels
 ====50404====
 * Fixed a German translation for Remove Corruption
 * Wild Growth seems to trigger every tick.. Bug in WoW?
 * Also added Wild Growth cooldown display by using the WG bar reverted
 * Added automatic report on people you innervate
-* Created a new options tab to configure macros for alt, ctrl and shift-click on player frames!
+* Created a new options tab to configure macro's for alt, ctrl and shift-click on player frames!
   By default, shift will now be the rezzing modifier and ctrl will be for innervating.
 * Fixed power type colouring
 * Improved rez reporting so that it only logs when actually rezzing

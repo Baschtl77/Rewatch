@@ -8,7 +8,7 @@ if (GetLocale() == "frFR") then
 	rewatch_loc["welcome"] = "Thank you for trying Rewatch!";
 	rewatch_loc["info"] = "You can open the options menu using \"/rewatch options\". Be sure to check out mouse-over macros to enhance gameplay even more!";
 	rewatch_loc["cleared"] = "Donn\195\169es correctement remises \195\160 z\195\169ro";
-	rewatch_loc["credits"] = "Rewatch AddOn par Dezine, AD (EU), 2008-2011. Pour l'aide, utiliser \"/rewatch help\"";
+	rewatch_loc["credits"] = "Rewatch AddOn par Dezine, AD (EU), 2008-2010. Pour l'aide, utiliser \"/rewatch help\"";
 	rewatch_loc["invalid_command"] = "Commande invalide. Pour de l'aide, taper \"/rewatch help\"";
 	rewatch_loc["noplayer"] = "No such player!";
 	rewatch_loc["combatfailed"] = "Cannot perform requested action; you're in combat";
@@ -42,7 +42,6 @@ if (GetLocale() == "frFR") then
 	rewatch_loc["invisible"] = "Invisible";
 	rewatch_loc["gcdText"] = "Global cooldown overlay transparency:";
 	rewatch_loc["OORText"] = "Out-Of-Range playerframe transparency:";
-	rewatch_loc["PBOText"] = "Passive bar transparency:";
 	rewatch_loc["hide"] = "Hide always";
 	rewatch_loc["hideSolo"] = "Hide when soloing";
 	rewatch_loc["hideButtons"] = "Hide bottom frame buttons";
@@ -65,16 +64,17 @@ if (GetLocale() == "frFR") then
 	rewatch_loc["healthbarHeight"] = "Healthbar height:";
 	rewatch_loc["castbarWidth"] = "Castbar width:";
 	rewatch_loc["castbarHeight"] = "Castbar height:";
+	rewatch_loc["castbarMargin"] = "Castbar margin:";
+	rewatch_loc["buttonMargin"] = "Button margin:";
+	rewatch_loc["buttonWidth"] = "Button width:";
+	rewatch_loc["buttonHeight"] = "Button height:";
 	rewatch_loc["sidebarWidth"] = "Sidebar (class) width:";
-	rewatch_loc["showDeficit"] = "Show health when HP less than";
+	rewatch_loc["deficitThreshold"] = "Show deficit when it's more than:";
+	rewatch_loc["showDeficit"] = "Show health deficit";
+	rewatch_loc["deficitNewLine"] = "Use new line for health deficit";
 	rewatch_loc["numFramesWide"] = "Number of player frames each line:";
 	rewatch_loc["maxNameLength"] = "Max displayed name length:";
 	rewatch_loc["reposition"] = "Reposition";
-	rewatch_loc["scaling"] = "Scaling:";
-	rewatch_loc["default"] = "Default layout";
-	rewatch_loc["vertical"] = "Vertical layout";
-	rewatch_loc["showSelfFirst"] = "Show Self First";
-	rewatch_loc["sortByRole"] = "Sort By Role";
 
 	-- help messages
 	rewatch_loc["help"] = {};
