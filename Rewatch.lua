@@ -1,5 +1,6 @@
 -- AddOn by Dezine, Argent Dawn, Europe. Please give me credit when you want to redistribute or modify this addon!
 -- Coen van der Wel, Almere, the Netherlands.
+-- SUP
 
 local rewatch_versioni = 50409;
 --------------------------------------------------------------------------------------------------------------[ FUNCTIONS ]----------------------
