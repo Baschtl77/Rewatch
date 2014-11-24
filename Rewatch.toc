@@ -9,6 +9,7 @@
 ## SavedVariables: rewatch_load, rewatch_version
 ## Dependencies:
 Locale\localization.enEN.lua
+Locale\localization.enUS.lua
 Locale\localization.deDE.lua
 Locale\localization.frFR.lua
 Locale\localization.esES.lua
