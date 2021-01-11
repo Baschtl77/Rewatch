@@ -10,7 +10,7 @@ function rewatch_Message(msg)
 	-- send the message to the chat pane
 	DEFAULT_CHAT_FRAME:AddMessage(rewatch_loc["prefix"]..msg, 1, 1, 1);
 	
-end
+end;
 
 -- displays a message to the user in the raidwarning frame
 -- msg: the message to pass onto the user
@@ -20,7 +20,22 @@ function rewatch_RaidMessage(msg)
 	-- send the message to the raid warning frame
 	RaidNotice_AddMessage(RaidWarningFrame, msg, { r = 1, g = 0.49, b = 0.04 });
 	
-end
+end;
+
+-- announce an action to the chat, preferring SAY but falling back to EMOTE & WHISPER
+-- action: the thing you are announcing (rezzing, innervating, ...)
+-- player: the name of the player you are targetting
+-- returns: void
+function rewatch_Announce(action, player)
+
+	if(select(1, IsInInstance())) then
+		SendChatMessage("I'm "..action.." "..player.."!", "SAY");
+	else
+		SendChatMessage("is "..action.." "..player.."!", "EMOTE");
+		SendChatMessage("I'm "..action.." you!", "WHISPER", nil, player);
+	end;
+
+end;
 
 -- loads the internal vars from the savedvariables
 -- return: void
@@ -962,8 +977,8 @@ function rewatch_DowndateBar(spellName, playerId)
 		if((spellName == rewatch_loc["wildgrowth"]) and (not rewatch_bars[playerId][spellName.."Bar"])) then return; end;
 		
 		-- reset bar values
-		_, r = rewatch_bars[playerId][spellName.."Bar"]:GetMinMaxValues();
-		rewatch_bars[playerId][spellName.."Bar"]:SetValue(r);
+		rewatch_bars[playerId][spellName.."Bar"]:SetMinMaxValues(0, 1);
+		rewatch_bars[playerId][spellName.."Bar"]:SetValue(1);
 		rewatch_bars[playerId][spellName] = 0;
 		if(rewatch_loadInt["Labels"] == 0) then rewatch_bars[playerId][spellName.."Bar"].text:SetText(""); end;
 		
@@ -1079,7 +1094,7 @@ function rewatch_AddPlayer(player, pet)
 	-- determine display name
 	local name, pos = player, player:find("-");
 	
-	if(pos ~= nil) then name = name:sub(1, s-1).."*"; end;
+	if(pos ~= nil) then name = name:sub(1, pos-1).."*"; end;
 	if((rewatch_loadInt["NameCharLimit"] ~= 0) and (name:len() >= rewatch_loadInt["NameCharLimit"])) then name = name:sub(1, rewatch_loadInt["NameCharLimit"] + 1); end;
 
 	-- put text in HP bar
@@ -1157,8 +1172,11 @@ function rewatch_AddPlayer(player, pet)
 	-- overlay target/remove button
 	local tgb = CreateFrame("BUTTON", nil, statusbar, "SecureActionButtonTemplate");
 
-	tgb:SetWidth(statusbar:GetWidth()); tgb:SetHeight(statusbar:GetHeight()); tgb:SetPoint("TOPLEFT", statusbar, "TOPLEFT", 0, 0);
-	tgb:SetHighlightTexture("Interface\\Buttons\\WHITE8x8.blp"); tgb:SetAlpha(0.05);
+	tgb:SetWidth(statusbar:GetWidth());
+	tgb:SetHeight(statusbar:GetHeight()*1.25);
+	tgb:SetPoint("TOPLEFT", statusbar, "TOPLEFT", 0, 0);
+	tgb:SetHighlightTexture("Interface\\Buttons\\WHITE8x8.blp");
+	tgb:SetAlpha(0.05);
 	
 	-- add mouse interaction
 	tgb:SetAttribute("type1", "target");
@@ -1828,8 +1846,8 @@ rewatch_events:SetScript("OnEvent", function(_, event, unitGUID, _)
 				
 			-- process innervate
 			elseif(isMe and (spell == rewatch_loc["innervate"]) and (targetName ~= UnitName("player"))) then
-			
-				SendChatMessage("Innervating "..targetName.."!", "SAY");
+
+				rewatch_Announce("innervating", targetName);
 				
 			-- process custom highlighting
 			elseif(rewatch_ProcessHighlight(spell, targetName, "Highlighting", "Notify")) then
@@ -1975,13 +1993,13 @@ rewatch_events:SetScript("OnEvent", function(_, event, unitGUID, _)
 			spell = select(13, CombatLogGetCurrentEventInfo());
 			
 			if((spell == rewatch_loc["rebirth"]) or (spell == rewatch_loc["revive"])) then
-			
-				if(not rewatch_rezzing) then rewatch_rezzing = ""; end;
-				if(UnitIsDeadOrGhost(rewatch_rezzing)) then
-					SendChatMessage("Rezzing "..rewatch_rezzing.."!", "SAY");
-					rewatch_rezzing = "";
-				end;
 
+				if(not rewatch_rezzing) then return; end;
+				if(not UnitIsDeadOrGhost(rewatch_rezzing)) then return; end;
+
+				rewatch_Announce("rezzing", rewatch_rezzing);
+				rewatch_rezzing = "";
+				
 			end;
 			
 		end;
@@ -2152,7 +2170,7 @@ rewatch_events:SetScript("OnUpdate", function()
 						
 						if(x > 0) then
 							if(x > 1000) then x = string.format("%#.1f", x/1000).."k"; end;
-							d = d.."\n"..x.." DTPS";
+							d = d.." ("..x..")";
 						end;
 						
 					end;
